@@ -13,6 +13,7 @@ void display();
 void AtBeg();
 void AtEnd();
 void Before();
+void After();
 
 int main(){
 
@@ -69,6 +70,7 @@ void insert()
         printf("\n\n 1. At Beginning");
         printf("\n 2. At End");
         printf("\n 3. Before");
+        printf("\n 4. After");
         printf("\n 6. Exit");
 
         printf("\n\nEnter Choice : ");
@@ -85,6 +87,10 @@ void insert()
 
         case 3:
             Before();
+            break;
+
+        case 4:
+            After();
             break;
         case 6:
             choice2 = 'n';
@@ -155,4 +161,26 @@ void Before(){
     temp1->next = node;
     node->next = temp;
     
+}
+
+void After(){
+    int val;
+    printf("\nEnter Value After which you want to Insert  : ");
+    scanf("%d", &val);
+
+    struct linkedlist *node, *temp;
+    node = (struct linkedlist *)malloc(sizeof(struct linkedlist));
+    printf("\nEnter Value : ");
+    scanf("%d", &node->data);
+    node->next = NULL;
+
+    temp = start;
+    while (temp->data != val)
+    {
+        temp = temp->next;
+    }
+    node->next = temp->next;
+    temp->next = node;
+    
+
 }
