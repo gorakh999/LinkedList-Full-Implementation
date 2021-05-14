@@ -9,11 +9,13 @@ struct linkedlist *start;
 
 void insert();
 void display();
+void count_nodes();
 
-void AtBeg();
-void AtEnd();
-void Before();
-void After();
+void  insert_AtBeg();
+void  insert_AtEnd();
+void  insert_Before();
+void  insert_After();
+void  insert_AtPos();
 
 int main(){
 
@@ -26,6 +28,7 @@ int main(){
     {
         printf("\n\n 1. Insert");
         printf("\n 2. Display");
+        printf("\n 6. Count Nodes");
         printf("\n 8. Exit");
 
         printf("\n\nEnter Choice : ");
@@ -39,6 +42,10 @@ int main(){
 
         case 2:
             display();
+            break;
+
+        case 6:
+            count_nodes();
             break;
         case 8:
             choice = 'n';
@@ -71,6 +78,7 @@ void insert()
         printf("\n 2. At End");
         printf("\n 3. Before");
         printf("\n 4. After");
+        printf("\n 5. At Position");
         printf("\n 6. Exit");
 
         printf("\n\nEnter Choice : ");
@@ -79,18 +87,22 @@ void insert()
         switch (ch2)
         {
         case 1:
-            AtBeg();
+           insert_AtBeg();
             break;
         case 2:
-            AtEnd();
+            insert_AtEnd();
             break;
 
         case 3:
-            Before();
+            insert_Before();
             break;
 
         case 4:
-            After();
+            insert_After();
+            break;
+
+        case 5:
+            insert_AtPos();
             break;
         case 6:
             choice2 = 'n';
@@ -117,7 +129,7 @@ step 5 - next[node] = TEMP
 step 6 - EXIT
 
 */
-void AtBeg(){
+void  insert_AtBeg(){
     struct linkedlist *node, *temp;
     node = (struct linkedlist *)malloc(sizeof(struct linkedlist));
     printf("\n\nEnter Value : ");
@@ -153,7 +165,7 @@ step 8 - exit
 
 */
 
-void AtEnd(){
+void  insert_AtEnd(){
     struct linkedlist *node, *temp;
     node = (struct linkedlist *)malloc(sizeof(struct linkedlist));
     printf("\n\nEnter Value : ");
@@ -190,7 +202,7 @@ step 8 - next[node ] = temp
 step 9 - Stop
 */
 
-void Before(){
+void  insert_Before(){
     int val;
     struct linkedlist *node, *temp, *temp1;
     printf("\nEnter Value Before Which you want to Insert : ");
@@ -229,7 +241,7 @@ step 9 - Stop
 
 */
 
-void After(){
+void  insert_After(){
     int val;
     printf("\nEnter Value After which you want to Insert  : ");
     scanf("%d", &val);
@@ -249,4 +261,78 @@ void After(){
     temp->next = node;
     
 
+}
+
+/*
+Algorithm to ADD a node  at specified position in LinkList :
+========================================
+step 1 - Start
+step 2 - Accept the position no. in n where we want to insert a node.
+step 3 - Create a new Node
+step 4 - temp = start
+step 5- repeat while(temp != NULL)
+	counter = counter + 1
+	temp = next[temp]
+step 6 - end of while
+step 7- if n > counter display "Invalid" and Return
+step 8- temp = start and i = 1
+step 9 - repeat while(i < n)
+	i = i + 1
+	temp1 = temp
+	temp = next[temp]
+step 10- end of while
+step 11 next[temp1] = node
+step 12 next[node ] = temp
+step 13 Stop
+
+*/
+
+void  insert_AtPos(){
+    int pos, counter = 0;
+    printf("Enter Position : \n");
+    scanf("%d", &pos);
+
+    struct linkedlist *node, *temp, *temp1;
+    node = (struct linkedlist *)malloc(sizeof(struct linkedlist));
+    temp = start;
+
+    while (temp != NULL){
+        counter = counter + 1;
+        temp = temp->next;
+    }
+
+    if (pos > counter){
+        printf("\nInvalid Position....\n");
+        return;
+    }
+   
+
+    int i = 1;
+    printf("\nEnter Value to be Inserted : ");
+    scanf("%d", &node->data);
+    node->next = NULL;
+    temp = start;
+
+    while (i < pos){
+        i += 1;
+        temp1 = temp;
+        temp = temp->next;
+    }
+
+    temp1->next = node;
+    node->next = temp;
+}
+
+
+void count_nodes(){
+    int counter = 0;
+    struct linkedlist *temp;
+    temp = start;
+    
+    while(temp != NULL){
+        counter = counter + 1;
+        temp = temp->next;
+    }
+
+    printf("\nTotal Nodes = %d\n", counter);
 }
