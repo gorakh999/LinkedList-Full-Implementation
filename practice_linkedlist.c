@@ -102,6 +102,21 @@ void insert()
     
 }
 
+/*
+Algorithm to ADD a node at Beg. of LinkList
+===========================================
+
+step 1 - Create a node/LinkedList
+step 2 - if START = NULL then
+	START = node
+	exit
+             end if
+step 3 - TEMP = START
+step 4 - START = node
+step 5 - next[node] = TEMP
+step 6 - EXIT
+
+*/
 void AtBeg(){
     struct linkedlist *node, *temp;
     node = (struct linkedlist *)malloc(sizeof(struct linkedlist));
@@ -119,6 +134,24 @@ void AtBeg(){
         node->next = temp;
     }
 }
+
+/*
+Algorithm to ADD a node at end of LinkList
+=============================
+
+step 1. Create a node
+step 2. if start == NULL then
+	start = node
+	exit
+            endif
+step 3. temp = start
+step 4. Repeat While next[temp] != NULL
+step 5-    temp = next[temp]
+step 6-   end of While
+step 7-  next[temp] = node
+step 8 - exit
+
+*/
 
 void AtEnd(){
     struct linkedlist *node, *temp;
@@ -139,6 +172,23 @@ void AtEnd(){
         temp->next = node;
     }
 }
+
+
+/*
+Algorithm to ADD a node before a specified node in LinkList :
+========================================
+step 1 - Start
+step 2 - Accept the value into val , before we want to add Node.
+step 3 - Create a Node.
+step 4 - temp = start
+step 5 - repeat while ( temp -> num != val )
+	temp1 = temp
+	temp = next [ temp ]
+step 6 - end of while
+step 7 - next[temp1] = node
+step 8 - next[node ] = temp
+step 9 - Stop
+*/
 
 void Before(){
     int val;
@@ -162,6 +212,22 @@ void Before(){
     node->next = temp;
     
 }
+
+/*
+Algorithm to ADD a node after a specified node in LinkList :
+============================================================
+step 1 - Start
+step 2 - Accept the value into val , after which we want to add Node.
+step 3 - Create a Node.
+step 4 - temp = start
+step 5 - repeat while ( temp -> num != val )
+	temp = next [ temp ]
+step 6 - end of while
+step 7 - next[node ] = next[temp]
+step 8 - next[temp] = node
+step 9 - Stop
+
+*/
 
 void After(){
     int val;
