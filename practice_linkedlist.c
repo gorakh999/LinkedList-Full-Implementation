@@ -9,6 +9,7 @@ struct linkedlist *start;
 
 void insert();
 void display();
+void delete();
 void count_nodes();
 
 void  insert_AtBeg();
@@ -16,6 +17,10 @@ void  insert_AtEnd();
 void  insert_Before();
 void  insert_After();
 void  insert_AtPos();
+
+void delete_atbeg();
+void delete_atend();
+void delete_before();
 
 int main(){
 
@@ -28,6 +33,7 @@ int main(){
     {
         printf("\n\n 1. Insert");
         printf("\n 2. Display");
+        printf("\n 3. Delete");
         printf("\n 6. Count Nodes");
         printf("\n 8. Exit");
 
@@ -42,6 +48,10 @@ int main(){
 
         case 2:
             display();
+            break;
+
+        case 3:
+            delete();
             break;
 
         case 6:
@@ -323,7 +333,9 @@ void  insert_AtPos(){
     node->next = temp;
 }
 
-
+/*
+Count Nodes
+*/
 void count_nodes(){
     int counter = 0;
     struct linkedlist *temp;
@@ -335,4 +347,130 @@ void count_nodes(){
     }
 
     printf("\nTotal Nodes = %d\n", counter);
+}
+
+
+void delete(){
+    int ch3;
+    char choice3;
+
+    do
+    {
+        printf("\n\n 1. At Beginning");
+        printf("\n 2. At End");
+        printf("\n 3. Before");
+        printf("\n 6. Exit");
+
+        printf("\nEnter Choice : ");
+        scanf("%d", &ch3);
+
+        switch (ch3)
+        {
+        case 1:
+            delete_atbeg();
+            break;
+
+        case 2:
+            delete_atend();
+            break;
+
+        case 3:
+            delete_before();
+            break;
+
+        case 6:
+            choice3 = 'n';
+            break;
+        
+        default:
+            printf("\nInvalid Choice...");
+            break;
+        }
+
+    } while (choice3 == 'y');
+    
+}
+
+/*
+Algorithm to delete at begin
+
+Step 1: Start
+Step 2: set temp := start
+Step 3: set start = start[next]
+Step 4: set temp[next] = NULL
+Step 5: Un-allocate memory pointed by temp.
+Step 6: Stop
+*/
+void delete_atbeg(){
+
+    struct linkedlist *temp;
+    temp = start;
+    start = start->next;
+    temp->next = NULL;
+    free(temp);
+}
+
+
+/*
+Algorithm to DELETE a node at end in a Linked List
+==================================================
+Step 1: Start
+Step 2: Set temp = start
+Step 3: repeat while(next[temp] != NULL) 	temp1 = temp 	temp = next[temp] 
+Step 4: next[temp1] = null
+Step 5: De-allocate memory pointed by temp.
+Step 6: Stop
+*/
+
+void delete_atend(){
+
+    struct linkedlist *temp, *temp1;
+    temp = start;
+    while (temp->next != NULL){
+        temp1 = temp;
+        temp = temp->next;
+    }
+    temp1->next = NULL;
+    free(temp);
+}
+
+/*
+Algorithm to DELETE a node before a specified node in Linked List: 
+======================================================== Step 1: Start
+Step 2: Accept the value into val , before we want to delete Node.
+Step 3: Create pointers temp, temp1, temp2
+Step 4: Set temp = start
+Step 5: Set temp1 = next[temp]
+Step 6: Set temp2 = next[temp1]
+Step 7: repeat while data[temp2] != val 	temp = next[temp] 	temp1 = next[temp]
+temp2 = next[temp1]
+end of while
+Step 8: next[temp] = temp2
+Step 9: next[temp1] = null
+Step 10: free(temp)
+Step 11: Stop
+
+*/
+
+void delete_before(){
+
+    int val;
+    printf("\nEnter Value Before u want to Delete : ");
+    scanf("%d", &val);
+
+    struct linkedlist *temp, *temp1, *temp2;
+    temp = start;
+    temp1 = temp->next;
+    temp2 = temp1->next;
+    while (temp2->data != val)
+    {
+        
+        temp = temp->next;
+        temp1 = temp->next;
+        temp2 = temp1->next;
+    }
+    temp->next = temp2;
+    temp1->next = NULL;
+    free(temp1);
+    
 }
