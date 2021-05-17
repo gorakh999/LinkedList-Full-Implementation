@@ -21,6 +21,8 @@ void  insert_AtPos();
 void delete_atbeg();
 void delete_atend();
 void delete_before();
+void delete_after();
+void delete_atpos();
 
 int main(){
 
@@ -359,6 +361,8 @@ void delete(){
         printf("\n\n 1. At Beginning");
         printf("\n 2. At End");
         printf("\n 3. Before");
+        printf("\n 4. After");
+        printf("\n 5. At Position");
         printf("\n 6. Exit");
 
         printf("\nEnter Choice : ");
@@ -376,6 +380,14 @@ void delete(){
 
         case 3:
             delete_before();
+            break;
+
+        case 4:
+            delete_after();
+            break;
+
+        case 5:
+            delete_atpos();
             break;
 
         case 6:
@@ -472,5 +484,59 @@ void delete_before(){
     temp->next = temp2;
     temp1->next = NULL;
     free(temp1);
+    
+}
+
+void delete_after(){
+    int val;
+    printf("\nEnter Value After u want to Delete : ");
+    scanf("%d", &val);
+
+    struct linkedlist *temp, *temp1, *temp2;
+    temp = start;
+    temp1 = temp->next;
+    // temp2 = temp1->next;
+
+    while (temp->data != val)
+    {
+        temp = temp->next;
+        temp1 = temp->next;
+        // temp2 = temp1->next;
+    }
+    temp->next = temp1->next;
+    temp1->next = NULL;
+    free(temp1);
+
+}
+
+
+void delete_atpos(){
+    int val;
+    printf("\nEnter Position u want to Delete : ");
+    scanf("%d", &val);
+
+    int counter = 0;
+    struct linkedlist *temp, *temp1;
+    temp = start;
+    while(temp != NULL){
+        counter++;
+        temp = temp->next;
+    }
+    if (val > counter){
+        printf("Invalid Choice....");
+        return;
+    }
+    
+    temp = start;
+    counter = 1;
+    while (counter < val){
+        counter++;
+        temp1 = temp;
+        temp = temp->next;
+    }
+    temp1->next = temp->next;
+    temp->next = NULL;
+    free(temp);
+    
     
 }
